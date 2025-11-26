@@ -36,6 +36,52 @@ namespace GaussianSplatting.Runtime
                 internal TextureHandle GaussianSplatRT;
             }
 
+            // Compatibility Mode path (when RenderGraph compatibility mode is ON)
+            [System.Obsolete]
+            public override void Execute(ScriptableRenderContext context, ref RenderingData renderingData)
+            {
+                var camera = renderingData.cameraData.camera;
+                CommandBuffer cmd = CommandBufferPool.Get(ProfilerTag);
+                
+                using (new ProfilingScope(cmd, s_profilingSampler))
+                {
+                    // Get camera target descriptor
+                    RenderTextureDescriptor rtDesc = renderingData.cameraData.cameraTargetDescriptor;
+                    rtDesc.depthBufferBits = 0;
+                    rtDesc.msaaSamples = 1;
+                    rtDesc.graphicsFormat = GraphicsFormat.R16G16B16A16_SFloat;
+
+                    // Get temporary render texture for Gaussian Splatting
+                    cmd.GetTemporaryRT(s_gaussianSplatRT, rtDesc, FilterMode.Point);
+                    cmd.SetGlobalTexture(s_gaussianSplatRT, s_gaussianSplatRT);
+
+                    // Render Gaussian Splats to temporary texture
+                    RTHandle cameraColorHandle = renderingData.cameraData.renderer.cameraColorTargetHandle;
+                    RTHandle cameraDepthHandle = renderingData.cameraData.renderer.cameraDepthTargetHandle;
+                    
+                    cmd.SetRenderTarget(s_gaussianSplatRT, cameraDepthHandle);
+                    cmd.ClearRenderTarget(false, true, Color.clear);
+                    
+                    Material matComposite = GaussianSplatRenderSystem.instance.SortAndRenderSplats(camera, cmd);
+                    
+                    // Composite Gaussian Splats onto camera target with proper blending
+                    cmd.BeginSample(GaussianSplatRenderSystem.s_ProfCompose);
+                    // Set render target without clearing (preserve AR background)
+                    cmd.SetRenderTarget(cameraColorHandle, RenderBufferLoadAction.Load, RenderBufferStoreAction.Store,
+                                       cameraDepthHandle, RenderBufferLoadAction.Load, RenderBufferStoreAction.Store);
+                    // Draw fullscreen quad with composite material (respects blend mode)
+                    cmd.DrawProcedural(Matrix4x4.identity, matComposite, 0, MeshTopology.Triangles, 3, 1);
+                    cmd.EndSample(GaussianSplatRenderSystem.s_ProfCompose);
+                    
+                    // Release temporary texture
+                    cmd.ReleaseTemporaryRT(s_gaussianSplatRT);
+                }
+
+                context.ExecuteCommandBuffer(cmd);
+                CommandBufferPool.Release(cmd);
+            }
+
+            // RenderGraph path (when RenderGraph compatibility mode is OFF)
             public override void RecordRenderGraph(RenderGraph renderGraph, ContextContainer frameData)
             {
                 using var builder = renderGraph.AddUnsafePass(ProfilerTag, out PassData passData);

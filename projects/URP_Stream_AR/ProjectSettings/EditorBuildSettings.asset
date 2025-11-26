@@ -4,5 +4,12 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Demo_ap.unity
+    guid: 3439f0845666c452595c9279f22ba28d
+  m_configObjects:
+    UnityEditor.XR.ARKit.ARKitSettings: {fileID: 11400000, guid: 688e6aa4d4ec4448dbb0c17ba7f07852, type: 2}
+    com.unity.xr.arfoundation.simulation_settings: {fileID: 11400000, guid: e7495e15baea84b23928b206cad1f193, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 1a65ebc45c04b42a9b6a648ced762f35, type: 2}
+  m_UseUCBPForAssetBundles: 0
