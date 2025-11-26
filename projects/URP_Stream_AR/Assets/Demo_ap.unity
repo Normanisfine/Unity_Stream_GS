@@ -151,8 +151,8 @@ MonoBehaviour:
   trackedImageManager: {fileID: 1816073857}
   gaussianSplatPrefab: {fileID: 3598526811420015647, guid: b6dcfa2c81095405d946d338495c7b43, type: 3}
   positionOffset: {x: 0, y: 0, z: 0}
-  rotationOffset: {x: -90, y: 0, z: 0}
-  scaleMultiplier: 0.1
+  rotationOffset: {x: 180, y: 0, z: 0}
+  scaleMultiplier: 1
   autoPlayOnDetection: 1
   pauseWhenLost: 1
 --- !u!4 &12376856
@@ -166,7 +166,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.04243684, y: 0.58372, z: -0.22306943}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
