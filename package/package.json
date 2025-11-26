@@ -1,0 +1,13 @@
+{
+  "author": "Mingjian Li",
+  "dependencies": { "com.unity.burst": "1.8.8", "com.unity.collections": "2.1.4", "com.unity.mathematics": "1.2.6" },
+  "description": "3D Gaussian Splatting streaming and sequence playback for Unity",
+  "displayName": "Gaussian Splatting Streaming",
+  "keywords": [ "unity", "gaussian-splatting", "streaming", "3d", "volumetric" ],
+  "license": "MIT",
+  "name": "com.limjiannn.gaussian-splatting-stream",
+  "repository": "github:limjiannn/UnityGaussianSplattingStream",
+  "unity": "2022.3",
+  "unityRelease": "7f1",
+  "version": "1.0.0"
+}
