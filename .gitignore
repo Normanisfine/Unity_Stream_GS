@@ -62,3 +62,17 @@ crashlytics-build.properties
 # Memory captures
 *.memsnap
 
+# =========================
+# Private/Large Data Files
+# =========================
+
+# Gaussian Splat converted data (large .bytes files)
+**/GaussianSequence/
+**/GaussianSequence.meta
+
+# Individual data files (backup pattern)
+*_chk.bytes
+*_pos.bytes
+*_oth.bytes
+*_col.bytes
+*_shs.bytes

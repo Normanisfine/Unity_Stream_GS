@@ -48,6 +48,16 @@ Add the `package` folder to your Unity project, or reference it via the Package 
 
 The `projects/URP_Stream` folder contains a demo Unity project using the Universal Render Pipeline (URP).
 
+### Setting Up the Demo
+
+1. Open `projects/URP_Stream` in Unity 2022.3+
+2. The demo scene is at `Assets/GSTestScene.unity`
+3. Use **Tools → Gaussian Splats → Batch Convert PLY Sequence** to convert your own PLY files
+4. Save converted data to `Assets/GaussianSequence/`
+5. Create or assign a `GaussianSplatSequence` to the player in the scene
+
+> **Note**: The `GaussianSequence/` folder containing converted splat data is not included in this repository due to size. You'll need to generate your own data from PLY files.
+
 ## Requirements
 
 - Unity 2022.3 or later
