@@ -2,7 +2,11 @@
 
 Real-time playback of animated 3D Gaussian Splatting sequences in Unity. This project extends the original [UnityGaussianSplatting](https://github.com/aras-p/UnityGaussianSplatting) by Aras Pranckevičius with streaming and sequence playback capabilities.
 
-![Gaussian Splatting in Unity](/docs/Images/shotOverview.jpg)
+<!-- ![Gaussian Splatting in Unity](/docs/Images/shotOverview.jpg) -->
+
+## AR Demo
+
+![AR Display Demo](/docs/Images/AR_demo.gif)
 
 ## Features
 
